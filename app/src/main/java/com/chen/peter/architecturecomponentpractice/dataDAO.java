@@ -10,6 +10,8 @@ import android.arch.persistence.room.Update;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.sql.DataSource;
+
 @Dao
 public interface dataDAO {
 
@@ -24,5 +26,8 @@ public interface dataDAO {
 
     @Query("SELECT * FROM dataTable")
     public LiveData<List<DataEntity>> selectAll();
+
+    @Query("SELECT * FROM dataTable")
+    public android.arch.paging.DataSource.Factory<Integer,DataEntity> getPagerAll();
 
 }

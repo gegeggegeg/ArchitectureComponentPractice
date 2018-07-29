@@ -2,8 +2,10 @@ package com.chen.peter.architecturecomponentpractice;
 
 import android.app.Application;
 import android.arch.lifecycle.LiveData;
+import android.arch.paging.DataSource;
 import android.arch.persistence.room.Room;
 import android.os.AsyncTask;
+import android.support.v7.util.DiffUtil;
 import android.util.Log;
 
 import java.util.ArrayList;
@@ -31,6 +33,10 @@ public class DataRepository {
 
     public LiveData<List<DataEntity>> getData(){
         return datadao.selectAll();
+    }
+
+    public DataSource.Factory<Integer,DataEntity> getSource(){
+        return datadao.getPagerAll();
     }
 
     public void InsertData (String data){
@@ -69,4 +75,6 @@ public class DataRepository {
             return null;
         }
     }
+
+
 }

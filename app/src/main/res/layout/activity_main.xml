@@ -16,49 +16,10 @@
         android:layout_height="match_parent"
         tools:context=".MainActivity">
 
-
-
-        <TextView
-            android:id="@+id/textHello"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@{dataModel.textHello}"
-            android:textSize="22sp"
-            android:layout_marginTop="100dp"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/textTest"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@{dataModel.textTest}"
-            android:textSize="20sp"
-            app:layout_constraintTop_toBottomOf="@id/textHello"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"/>
-        <EditText
-            android:id="@+id/testInput"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@{dataModel.textEditText}"
-            android:hint="Enter here"
-            android:layout_marginTop="10dp"
-            app:addTextChangedListener="@{dataModel.textWatcher}"
-            app:layout_constraintTop_toBottomOf="@id/textTest"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"/>
-
-        <Button
-            android:text="Assert LiveData"
-            android:id="@+id/Btn1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/testInput"/>
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recyclerView1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
 
     </android.support.constraint.ConstraintLayout>
 
