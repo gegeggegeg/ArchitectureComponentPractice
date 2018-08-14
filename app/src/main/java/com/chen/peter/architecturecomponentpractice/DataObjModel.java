@@ -23,10 +23,6 @@ public class DataObjModel extends AndroidViewModel{
         pagedList = new LivePagedListBuilder<>(mRepository.getSource(),20).build();
     }
 
-    public LiveData<List<DataEntity>> getRoomData(){
-        return mRepository.getData();
-    }
-
     public void insertData(String data){
         mRepository.InsertData(data);
     }
@@ -34,4 +30,6 @@ public class DataObjModel extends AndroidViewModel{
     public LiveData<PagedList<DataEntity>> getPagedList() {
         return pagedList;
     }
+
+    public void deleteData(String data) { mRepository.deleteNamedData(data);}
 }

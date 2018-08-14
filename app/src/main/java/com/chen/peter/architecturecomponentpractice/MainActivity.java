@@ -1,28 +1,25 @@
 package com.chen.peter.architecturecomponentpractice;
 
-import android.app.Activity;
+import android.app.AlertDialog;
 import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.Observer;
-import android.arch.lifecycle.ViewModelProvider;
 import android.arch.lifecycle.ViewModelProviders;
 import android.arch.paging.PagedList;
+import android.content.DialogInterface;
 import android.databinding.DataBindingUtil;
 import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
+
 
 import com.chen.peter.architecturecomponentpractice.databinding.ActivityMainBinding;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -51,5 +48,29 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         mActivityMainBinding.setDataModel(mDataModel);
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        final EditText editText = new EditText(this);
+        builder.setTitle("Enter data")
+                .setView(editText)
+                .setPositiveButton("insert", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        mDataModel.insertData(editText.getText().toString());
+                    }
+                })
+                .setNegativeButton("delete", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        mDataModel.deleteData(editText.getText().toString());
+                    }
+                });
+        final AlertDialog dialog = builder.create();
+        FloatingActionButton FAB = findViewById(R.id.FAB);
+        FAB.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.show();
+            }
+        });
     }
 }

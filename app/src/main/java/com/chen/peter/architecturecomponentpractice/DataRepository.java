@@ -31,7 +31,7 @@ public class DataRepository {
         new initInsetTask().execute();
     }
 
-    public LiveData<List<DataEntity>> getData(){
+    public List<DataEntity> getData(){
         return datadao.selectAll();
     }
 
@@ -44,20 +44,25 @@ public class DataRepository {
         new InsertTask(data).execute();
     }
 
+    public void deleteNamedData(String data){
+        new DeleteTask().execute(data);
+    }
+
     private static class initInsetTask extends AsyncTask<DataEntity,Void,Void>{
 
         @Override
         protected Void doInBackground(DataEntity... dataEntities) {
-            for(String s: words) {
-                DataEntity temp = new DataEntity(s);
-                long rowID = datadao.insertData(temp);
-                temp.set_id(rowID);
-                list.add(temp);
+            if (datadao.selectAll().isEmpty()) {
+                for (String s : words) {
+                    DataEntity temp = new DataEntity(s);
+                    long rowID = datadao.insertData(temp);
+                    temp.set_id(rowID);
+                    list.add(temp);
+                }
             }
             return null;
         }
     }
-
     private static class InsertTask extends AsyncTask<DataEntity,Void,Void>{
         private String data;
 
@@ -75,6 +80,16 @@ public class DataRepository {
             return null;
         }
     }
+
+    public static class DeleteTask extends AsyncTask<String,Void,Void>{
+
+        @Override
+        protected Void doInBackground(String... strings) {
+            datadao.deleteNamedData(strings[0]);
+            return null;
+        }
+    }
+
 
 
 }

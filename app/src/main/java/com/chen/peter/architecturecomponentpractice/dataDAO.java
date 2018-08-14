@@ -25,9 +25,13 @@ public interface dataDAO {
     public void deleteData(DataEntity data);
 
     @Query("SELECT * FROM dataTable")
-    public LiveData<List<DataEntity>> selectAll();
+    public List<DataEntity> selectAll();
 
     @Query("SELECT * FROM dataTable")
     public android.arch.paging.DataSource.Factory<Integer,DataEntity> getPagerAll();
+
+    @Query("DELETE FROM dataTable WHERE data = :input")
+    public void deleteNamedData(String input);
+
 
 }

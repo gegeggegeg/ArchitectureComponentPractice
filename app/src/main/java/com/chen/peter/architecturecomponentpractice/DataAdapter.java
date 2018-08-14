@@ -4,11 +4,13 @@ import android.arch.paging.PagedListAdapter;
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v7.util.DiffUtil;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
 public class DataAdapter extends PagedListAdapter<DataEntity,DataHolder> {
 
+    private static final String TAG = "DataAdapter";
     private Context context;
     protected DataAdapter(Context context) {
         super(diffCallBack);
@@ -18,6 +20,7 @@ public class DataAdapter extends PagedListAdapter<DataEntity,DataHolder> {
     @NonNull
     @Override
     public DataHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        Log.d(TAG, "onCreateViewHolder: inflate");
         LayoutInflater inflater = (LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         return new DataHolder(inflater.inflate(R.layout.row_layout,parent,false));
     }
@@ -41,4 +44,6 @@ public class DataAdapter extends PagedListAdapter<DataEntity,DataHolder> {
             return oldItem.getData().equals(newItem.getData());
         }
     };
+
+
 }
